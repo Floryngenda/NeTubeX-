@@ -2,147 +2,965 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NeTubeX | Rémunération Digitale</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>NeoTribeX | Révolution de la rémunération digitale</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Inter',sans-serif;background:radial-gradient(circle at 20% 30%,#0a0f1e,#020408);min-height:100vh;color:#eef2ff;line-height:1.5;}
-@keyframes fadeUp{0%{opacity:0;transform:translateY(30px);}100%{opacity:1;transform:translateY(0);}}
-@keyframes glowPulse{0%{box-shadow:0 0 0 0 rgba(0,230,210,0.4);}70%{box-shadow:0 0 0 12px rgba(0,230,210,0);}100%{box-shadow:0 0 0 0 rgba(0,230,210,0);}}
-@keyframes borderSlide{0%{background-position:0% 50%;}100%{background-position:100% 50%;}}
-.container{max-width:1200px;margin:0 auto;padding:1.5rem 2rem;}
-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;background:rgba(10,20,30,0.55);backdrop-filter:blur(12px);border-radius:2rem;padding:0.7rem 2rem;margin-bottom:2.5rem;border:1px solid rgba(0,255,255,0.2);animation:fadeUp 0.6s ease-out;}
-.logo h1{font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,#fff,#5ee0fa,#b0f3ff);background-clip:text;-webkit-background-clip:text;color:transparent;}
-.logo span{font-size:0.7rem;font-weight:400;color:#8fa6cb;display:block;}
-.nav-links a{color:#cfdfed;margin-left:2rem;text-decoration:none;font-weight:500;transition:0.2s;border-bottom:1px solid transparent;}
-.nav-links a:hover{color:#5ef0ff;border-bottom-color:#5ef0ff;}
-.hero{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:2rem;margin:1rem 0 3rem 0;animation:fadeUp 0.7s ease-out;}
-.hero-content{flex:1;}
-.badge{background:rgba(0,210,200,0.2);backdrop-filter:blur(4px);display:inline-block;padding:0.25rem 1rem;border-radius:40px;font-size:0.75rem;font-weight:600;color:#a0f0ff;border:1px solid rgba(0,230,210,0.5);margin-bottom:1rem;}
-.hero-content h2{font-size:3rem;font-weight:800;line-height:1.2;background:linear-gradient(to right,#f0fcff,#b5e4ff,#7fc9ff);background-clip:text;-webkit-background-clip:text;color:transparent;margin-bottom:1rem;}
-.hero-content p{font-size:1.1rem;color:#b9cef0;margin-bottom:1.8rem;}
-.hero-stats{display:flex;gap:2rem;}
-.stat h3{font-size:1.8rem;font-weight:800;color:#fff;}
-.stat p{font-size:0.8rem;color:#8eafe0;}
-.hero-illustration{flex:1;text-align:center;}
-.hero-illustration i{font-size:10rem;color:rgba(80,210,240,0.25);filter:drop-shadow(0 0 12px #00ccff55);transition:transform 0.3s;}
-.hero-illustration i:hover{transform:scale(1.02);}
-.section-title{font-size:1.8rem;font-weight:700;margin:2.5rem 0 1.5rem;text-align:center;background:linear-gradient(120deg,#eef2ff,#99c6ff);background-clip:text;-webkit-background-clip:text;color:transparent;}
-.cards{display:flex;flex-wrap:wrap;gap:1.8rem;justify-content:center;margin:1.5rem 0 2.5rem;}
-.card{background:rgba(20,30,45,0.65);backdrop-filter:blur(10px);border-radius:1.8rem;padding:1.8rem 1.2rem;width:260px;text-align:center;transition:all 0.3s ease;border:1px solid rgba(80,200,240,0.2);transform:translateY(0);}
-.card:hover{transform:translateY(-8px);border-color:#3ecfef;box-shadow:0 20px 30px -12px rgba(0,180,220,0.3);background:rgba(25,40,60,0.8);}
-.card i{font-size:2.5rem;background:linear-gradient(145deg,#7fd9ff,#2ab0d0);background-clip:text;-webkit-background-clip:text;color:transparent;margin-bottom:1rem;}
-.card h3{font-size:1.3rem;margin-bottom:0.6rem;}
-.card p{font-size:0.85rem;color:#bdd4f0;}
-.btn-glow{background:linear-gradient(95deg,#00b4aa,#0088aa);border:none;padding:0.9rem 2.2rem;border-radius:3rem;font-weight:700;font-size:1rem;color:#fff;cursor:pointer;transition:0.2s;margin:1rem 0 1rem;animation:glowPulse 2s infinite;font-family:inherit;box-shadow:0 5px 15px rgba(0,180,170,0.3);}
-.btn-glow:hover{transform:scale(1.02);background:linear-gradient(95deg,#00cdc0,#00a0c0);letter-spacing:0.5px;}
-.cta-wrapper{text-align:center;margin:2rem 0 2rem;}
-footer{text-align:center;padding:2rem 0 1rem;border-top:1px solid rgba(100,180,220,0.2);margin-top:2rem;font-size:0.8rem;color:#7f95b5;}
-/* Popup overlay */
-.popup-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);backdrop-filter:blur(5px);display:flex;align-items:center;justify-content:center;z-index:1000;visibility:hidden;opacity:0;transition:visibility 0.2s,opacity 0.2s;}
-.popup-overlay.active{visibility:visible;opacity:1;}
-.popup{background:linear-gradient(145deg,#0f1725,#03070f);border-radius:2rem;max-width:420px;width:90%;padding:2rem 1.8rem;text-align:center;border:1px solid #2ad4dd;transform:scale(0.9);transition:transform 0.25s cubic-bezier(0.2,0.9,0.4,1.1);box-shadow:0 30px 40px rgba(0,0,0,0.5);}
-.popup-overlay.active .popup{transform:scale(1);}
-.popup i{font-size:3.5rem;color:#2ad4dd;margin-bottom:1rem;}
-.popup h3{font-size:1.8rem;margin-bottom:0.8rem;}
-.popup p{color:#b9d0f0;margin-bottom:1.5rem;font-size:0.95rem;}
-.popup input{width:100%;padding:0.9rem 1rem;border-radius:2rem;border:none;background:#1e2a3a;color:#fff;margin-bottom:1rem;font-family:inherit;outline:none;border:1px solid #2e4a6a;transition:0.2s;}
-.popup input:focus{border-color:#2ad4dd;}
-.popup .popup-buttons{display:flex;gap:1rem;justify-content:center;}
-.popup .btn-confirm{background:#2ad4dd;border:none;padding:0.7rem 1.5rem;border-radius:2rem;font-weight:700;cursor:pointer;color:#0a0f1e;}
-.popup .btn-close{background:transparent;border:1px solid #5f8bb3;padding:0.7rem 1.5rem;border-radius:2rem;font-weight:600;cursor:pointer;color:#cce6ff;}
-.popup .btn-confirm:hover{background:#3ee9f2;}
-.popup .btn-close:hover{background:rgba(90,150,200,0.2);}
-@media (max-width:700px){.container{padding:1rem;}.hero-content h2{font-size:2.2rem;}.hero-illustration i{font-size:6rem;}.nav-links a{margin-left:1rem;font-size:0.85rem;}}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(145deg, #0a0c0f 0%, #0f1115 100%);
+    color: #eef2ff;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap');
+
+/* Animations globales */
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes pulseGlow {
+    0%, 100% { opacity: 0.6; filter: blur(20px); }
+    50% { opacity: 1; filter: blur(25px); }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 32px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Effet de particules en arrière-plan */
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    background: linear-gradient(135deg, #4fd1c5, #2b9b8f);
+    border-radius: 50%;
+    opacity: 0.15;
+    animation: float 8s ease-in-out infinite;
+}
+
+/* Header amélioré */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 0;
+    flex-wrap: wrap;
+    gap: 20px;
+    position: relative;
+    z-index: 10;
+}
+
+.logo-text {
+    font-size: 3.4rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #d4fcf5, #4fd1c5, #2b9b8f);
+    background-size: 200% 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    letter-spacing: -1px;
+    transition: all 0.3s;
+    animation: gradientFlow 3s ease infinite;
+    position: relative;
+}
+
+.logo-text::after {
+    content: 'β';
+    font-size: 1.2rem;
+    position: absolute;
+    top: -5px;
+    right: -25px;
+    background: #4fd1c5;
+    color: #0a0c0f;
+    padding: 2px 6px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.7rem;
+}
+
+.btn-group {
+    display: flex;
+    gap: 16px;
+}
+
+.btn-outline {
+    background: rgba(79, 209, 197, 0.1);
+    border: 1.5px solid #4fd1c5;
+    padding: 12px 32px;
+    border-radius: 50px;
+    font-weight: 600;
+    color: #4fd1c5;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 0.95rem;
+    backdrop-filter: blur(10px);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-outline:hover {
+    background: #4fd1c5;
+    color: #0a0c0f;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(79, 209, 197, 0.3);
+}
+
+.btn-solid {
+    background: linear-gradient(135deg, #4fd1c5, #2b9b8f);
+    border: none;
+    padding: 12px 36px;
+    border-radius: 50px;
+    font-weight: 700;
+    color: #0a0c0f;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-solid::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-solid:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-solid:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(79, 209, 197, 0.4);
+}
+
+/* Hero section améliorée */
+.hero-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    margin: 60px 0 80px;
+}
+
+.hero-left {
+    animation: slideInLeft 0.8s ease-out;
+}
+
+.hero-badge {
+    display: inline-block;
+    background: rgba(79, 209, 197, 0.15);
+    backdrop-filter: blur(10px);
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #4fd1c5;
+    margin-bottom: 24px;
+    border: 1px solid rgba(79, 209, 197, 0.3);
+}
+
+.hero-left h1 {
+    font-size: 3.8rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 24px;
+    background: linear-gradient(135deg, #ffffff, #4fd1c5, #b8f2e2);
+    background-size: 200% 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: gradientFlow 3s ease infinite;
+}
+
+.hero-left p {
+    font-size: 1.2rem;
+    color: #a0a8b8;
+    line-height: 1.6;
+    margin-bottom: 32px;
+}
+
+.hero-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.stat-item {
+    text-align: left;
+}
+
+.stat-number {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #4fd1c5;
+    display: block;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: #8a92a3;
+    margin-top: 4px;
+}
+
+.hero-right {
+    animation: slideInRight 0.8s ease-out;
+    position: relative;
+}
+
+.image-container {
+    position: relative;
+    border-radius: 32px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.member-hero-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    filter: brightness(1.05) contrast(1.05);
+}
+
+.image-container:hover .member-hero-img {
+    transform: scale(1.05);
+}
+
+.glow-effect {
+    position: absolute;
+    top: -20%;
+    left: -20%;
+    width: 140%;
+    height: 140%;
+    background: radial-gradient(circle, rgba(79,209,197,0.1) 0%, transparent 70%);
+    pointer-events: none;
+    animation: pulseGlow 3s ease-in-out infinite;
+}
+
+/* Cartes améliorées */
+.activities-wrapper {
+    background: linear-gradient(135deg, rgba(30, 33, 40, 0.7), rgba(20, 22, 28, 0.8));
+    backdrop-filter: blur(20px);
+    border-radius: 48px;
+    padding: 48px 48px 64px;
+    margin: 80px 0 60px;
+    border: 1px solid rgba(79, 209, 197, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.activities-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(79,209,197,0.05) 0%, transparent 70%);
+    animation: float 20s ease-in-out infinite;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 48px;
+    text-align: center;
+    background: linear-gradient(135deg, #ffffff, #4fd1c5);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.activities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 32px;
+    position: relative;
+    z-index: 2;
+}
+
+.activity-card {
+    background: linear-gradient(135deg, rgba(40, 44, 52, 0.8), rgba(30, 33, 40, 0.9));
+    backdrop-filter: blur(10px);
+    border-radius: 32px;
+    padding: 40px 28px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(79, 209, 197, 0.2);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.activity-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(79, 209, 197, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.activity-card:hover::before {
+    left: 100%;
+}
+
+.activity-card:hover {
+    transform: translateY(-12px);
+    border-color: #4fd1c5;
+    box-shadow: 0 20px 40px -15px rgba(79, 209, 197, 0.3);
+}
+
+.card-icon {
+    font-size: 3.5rem;
+    color: #4fd1c5;
+    margin-bottom: 24px;
+    transition: transform 0.3s;
+}
+
+.activity-card:hover .card-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.activity-card h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #ffffff;
+}
+
+.activity-card p {
+    color: #a0a8b8;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.card-stats {
+    margin-top: 24px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 0.85rem;
+    color: #4fd1c5;
+}
+
+/* Section testimoniale */
+.testimonials-section {
+    margin: 80px 0;
+    padding: 40px 0;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 32px;
+    margin-top: 48px;
+}
+
+.testimonial-card {
+    background: linear-gradient(135deg, rgba(35, 38, 45, 0.7), rgba(25, 28, 35, 0.8));
+    backdrop-filter: blur(10px);
+    border-radius: 28px;
+    padding: 32px;
+    border: 1px solid rgba(79, 209, 197, 0.2);
+    transition: all 0.3s;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-8px);
+    border-color: #4fd1c5;
+}
+
+.testimonial-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #c8d0e0;
+    margin-bottom: 24px;
+    font-style: italic;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.author-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4fd1c5, #2b9b8f);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.author-info h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.author-info p {
+    font-size: 0.8rem;
+    color: #4fd1c5;
+}
+
+/* CTA Section */
+.cta-section {
+    background: linear-gradient(135deg, rgba(79, 209, 197, 0.1), rgba(43, 155, 143, 0.05));
+    border-radius: 48px;
+    padding: 60px 48px;
+    text-align: center;
+    margin: 60px 0;
+    border: 1px solid rgba(79, 209, 197, 0.2);
+}
+
+.cta-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+}
+
+.cta-section p {
+    font-size: 1.1rem;
+    color: #a0a8b8;
+    margin-bottom: 32px;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Footer amélioré */
+footer {
+    background: linear-gradient(135deg, #0a0c0f, #0f1115);
+    margin-top: 60px;
+    padding: 60px 20px 40px;
+    border-top: 1px solid rgba(79, 209, 197, 0.2);
+    position: relative;
+}
+
+.footer-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 48px;
+    padding: 0 20px;
+}
+
+.footer-brand h3 {
+    font-size: 2rem;
+    background: linear-gradient(135deg, #d4fcf5, #4fd1c5);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-bottom: 12px;
+}
+
+.footer-brand p {
+    color: #8a92a3;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.footer-links a {
+    color: #a0a8b8;
+    text-decoration: none;
+    transition: color 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.footer-links a:hover {
+    color: #4fd1c5;
+    transform: translateX(5px);
+}
+
+.footer-newsletter input {
+    background: rgba(30, 33, 40, 0.8);
+    border: 1px solid rgba(79, 209, 197, 0.3);
+    padding: 12px 16px;
+    border-radius: 50px;
+    color: white;
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.footer-newsletter button {
+    background: linear-gradient(135deg, #4fd1c5, #2b9b8f);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 50px;
+    color: #0a0c0f;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+}
+
+.footer-copyright {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding-top: 40px;
+    border-top: 1px solid rgba(79, 209, 197, 0.1);
+    margin-top: 20px;
+}
+
+/* Animations au scroll */
+.fade-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+    .hero-section {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .hero-left h1 {
+        font-size: 2.8rem;
+    }
+    
+    .container {
+        padding: 0 20px;
+    }
+    
+    .activities-wrapper {
+        padding: 32px 20px;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 568px) {
+    .hero-left h1 {
+        font-size: 2rem;
+    }
+    
+    .navbar {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .btn-group {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .btn-outline, .btn-solid {
+        text-align: center;
+        justify-content: center;
+    }
+    
+    .hero-stats {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
 </style>
 </head>
 <body>
+
+<div class="particles" id="particles"></div>
+
 <div class="container">
-    <header>
-        <div class="logo">
-            <h1>NeTubeX</h1>
-            <span>espace de rémunération digitale</span>
+    <div class="navbar fade-up">
+        <div class="logo-text">NeoTribeX</div>
+        <div class="btn-group">
+            <a href="#" class="btn-outline" id="connectBtn">
+                <i class="fas fa-user-astronaut"></i> Espace membre
+            </a>
+            <a href="#" class="btn-solid" id="postulerBtn">
+                <i class="fas fa-rocket"></i> Rejoindre
+            </a>
         </div>
-        <div class="nav-links">
-            <a href="#">Accueil</a>
-            <a href="#">Solutions</a>
-            <a href="#">Contact</a>
-        </div>
-    </header>
-    <section class="hero">
-        <div class="hero-content">
-            <div class="badge"><i class="fas fa-coins"></i> Monétisez votre présence</div>
-            <h2>Gagnez <span style="color:#7fe0ff;">digitalement</span><br>sans limites</h2>
-            <p>NeTubeX transforme chaque interaction en revenu. Créateurs, influenceurs, entreprises : recevez vos paiements avec transparence et rapidité.</p>
+    </div>
+
+    <div class="hero-section">
+        <div class="hero-left fade-up">
+            <div class="hero-badge">
+                <i class="fas fa-crown"></i> Programme officiel 2026
+            </div>
+            <h1>Transformez votre passion<br>en revenu illimité</h1>
+            <p>NeoTribeX révolutionne la rémunération digitale. Chaque action, chaque minute devient une opportunité de générer des revenus réels et durables.</p>
             <div class="hero-stats">
-                <div class="stat"><h3>+15k</h3><p>Créateurs actifs</p></div>
-                <div class="stat"><h3>€4.2M</h3><p>Rémunérés en 2025</p></div>
-                <div class="stat"><h3>0%</h3><p>Frais cachés</p></div>
+                <div class="stat-item">
+                    <span class="stat-number">+50K</span>
+                    <span class="stat-label">Membres actifs</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">€2.4M</span>
+                    <span class="stat-label">Rémunérés</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">4.9★</span>
+                    <span class="stat-label">Satisfaction</span>
+                </div>
             </div>
         </div>
-        <div class="hero-illustration">
-            <i class="fas fa-chart-line"></i>
-        </div>
-    </section>
-    <div class="section-title"><i class="fas fa-crown"></i> Pourquoi NeTubeX ?</div>
-    <div class="cards">
-        <div class="card"><i class="fas fa-bolt"></i><h3>Paiements instantanés</h3><p>Virement quotidien sous 24h, vers crypto ou euros.</p></div>
-        <div class="card"><i class="fas fa-shield-alt"></i><h3>Sécurité bancaire</h3><p>Chiffrement de bout en bout & conformité PCI DSS.</p></div>
-        <div class="card"><i class="fas fa-chart-simple"></i><h3>Analytics avancés</h3><p>Dashboard temps réel pour optimiser vos gains.</p></div>
-    </div>
-    <div class="cta-wrapper">
-        <button class="btn-glow" id="openPopupBtn"><i class="fas fa-rocket" style="margin-right:8px;"></i> Démarrer maintenant</button>
-    </div>
-    <footer>
-        <p>© 2026 NeTubeX — Révolutionnez votre rémunération digitale</p>
-    </footer>
-</div>
-<div class="popup-overlay" id="popupOverlay">
-    <div class="popup">
-        <i class="fas fa-gem"></i>
-        <h3>Accédez à NeTubeX</h3>
-        <p>Recevez votre bonus de bienvenue et débloquez toutes les fonctionnalités de rémunération.</p>
-        <input type="email" placeholder="votre@email.com" id="popupEmail">
-        <div class="popup-buttons">
-            <button class="btn-confirm" id="confirmPopupBtn">Activer</button>
-            <button class="btn-close" id="closePopupBtn">Fermer</button>
+        <div class="hero-right fade-up">
+            <div class="image-container">
+                <img src="https://i.postimg.cc/CKtrLPtY/e3ee76ac-9224-4d38-bdd3-d4b29da56116.jpg" alt="Membre NeoTribeX" class="member-hero-img" onerror="this.src='https://placehold.co/800x600/2c3e35/4fd1c5?text=NeoTribeX'">
+                <div class="glow-effect"></div>
+            </div>
         </div>
     </div>
+
+    <div class="activities-wrapper fade-up">
+        <h2 class="section-title">Nos activités rémunératrices</h2>
+        <div class="activities-grid">
+            <div class="activity-card">
+                <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                <h3>Missions premium</h3>
+                <p>Des objectifs sur mesure avec des récompenses immédiates et des bonus exclusifs</p>
+                <div class="card-stats">
+                    <span><i class="fas fa-clock"></i> 5-15 min</span>
+                    <span><i class="fas fa-euro-sign"></i> Jusqu'à 50€</span>
+                </div>
+            </div>
+            <div class="activity-card">
+                <div class="card-icon"><i class="fas fa-trophy"></i></div>
+                <h3>Compétitions live</h3>
+                <p>Affrontez la communauté et remportez des prix exceptionnels chaque semaine</p>
+                <div class="card-stats">
+                    <span><i class="fas fa-users"></i> +1000 joueurs</span>
+                    <span><i class="fas fa-gem"></i> Lots exclusifs</span>
+                </div>
+            </div>
+            <div class="activity-card">
+                <div class="card-icon"><i class="fas fa-microphone-alt"></i></div>
+                <h3>Quiz interactifs</h3>
+                <p>Testez vos connaissances et accumulez des points convertibles en cash</p>
+                <div class="card-stats">
+                    <span><i class="fas fa-brain"></i> +500 thèmes</span>
+                    <span><i class="fas fa-coins"></i> Cash instantané</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="testimonials-section fade-up">
+        <h2 class="section-title">Ils ont déjà rejoint l'aventure</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-text">
+                    "Je gagne plus de 800€ par mois simplement en utilisant NeoTribeX pendant mon temps libre. Une véritable révolution !"
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">S</div>
+                    <div class="author-info">
+                        <h4>Sophie Martin</h4>
+                        <p>Membre depuis 2024</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-text">
+                    "L'interface est incroyablement intuitive et les récompenses sont toujours au rendez-vous. Je recommande à 100%."
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">T</div>
+                    <div class="author-info">
+                        <h4>Thomas Bernard</h4>
+                        <p>Top créateur</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-text">
+                    "Une communauté exceptionnelle et des opportunités uniques. NeoTribeX a changé ma vision du travail en ligne."
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">L</div>
+                    <div class="author-info">
+                        <h4>Laura Dubois</h4>
+                        <p>Ambassadrice</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cta-section fade-up">
+        <h2>Prêt à transformer votre quotidien ?</h2>
+        <p>Rejoignez la communauté NeoTribeX et commencez à gagner dès aujourd'hui</p>
+        <div class="cta-buttons">
+            <a href="#" class="btn-solid" id="ctaMainBtn"><i class="fas fa-arrow-right"></i> Commencer maintenant</a>
+            <a href="#" class="btn-outline" id="ctaSecondaryBtn"><i class="fas fa-play"></i> Voir la démo</a>
+        </div>
+    </div>
 </div>
+
+<footer>
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <h3>NeoTribeX</h3>
+            <p>La nouvelle ère de la rémunération digitale. Innovation, transparence et performance.</p>
+        </div>
+        <div class="footer-links">
+            <a href="#"><i class="fas fa-info-circle"></i> À propos</a>
+            <a href="#"><i class="fas fa-envelope"></i> Contact</a>
+            <a href="#"><i class="fas fa-shield-alt"></i> Confidentialité</a>
+            <a href="#"><i class="fas fa-file-contract"></i> Conditions</a>
+        </div>
+        <div class="footer-newsletter">
+            <h4>Newsletter</h4>
+            <input type="email" placeholder="Votre email" id="newsletterEmail">
+            <button id="newsletterBtn">S'abonner</button>
+        </div>
+        <div class="footer-copyright">
+            <p>© 2026 NeoTribeX — Tous droits réservés. Une plateforme de rémunération digitale nouvelle génération.</p>
+        </div>
+    </div>
+</footer>
+
 <script>
-(function(){
-    const overlay = document.getElementById('popupOverlay');
-    const openBtn = document.getElementById('openPopupBtn');
-    const closeBtn = document.getElementById('closePopupBtn');
-    const confirmBtn = document.getElementById('confirmPopupBtn');
-    const emailInput = document.getElementById('popupEmail');
-    function openPopup(){ overlay.classList.add('active'); document.body.style.overflow='hidden'; }
-    function closePopup(){ overlay.classList.remove('active'); document.body.style.overflow=''; }
-    openBtn.addEventListener('click',openPopup);
-    closeBtn.addEventListener('click',closePopup);
-    confirmBtn.addEventListener('click',function(){
-        let email = emailInput.value.trim();
-        if(email===""){
-            alert("Veuillez entrer une adresse email pour activer votre espace.");
-            return;
+// Génération de particules animées
+function createParticles() {
+    const particlesContainer = document.getElementById('particles');
+    const particleCount = 50;
+    
+    for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        const size = Math.random() * 4 + 2;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 8 + 's';
+        particle.style.animationDuration = Math.random() * 6 + 6 + 's';
+        particlesContainer.appendChild(particle);
+    }
+}
+
+// Animation au scroll améliorée
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
         }
-        if(!email.includes('@') || !email.includes('.')){
-            alert("Email invalide. Exemple : nom@domaine.com");
-            return;
+    });
+}, observerOptions);
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Interactions utilisateur
+document.getElementById('connectBtn')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    showNotification('🔐 Accès à l\'espace membre sécurisé', 'info');
+});
+
+document.getElementById('postulerBtn')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    showNotification('✨ Félicitations ! Un email de bienvenue vous a été envoyé', 'success');
+});
+
+document.getElementById('ctaMainBtn')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    showNotification('🚀 Lancez-vous ! Créez votre compte gratuitement', 'success');
+});
+
+document.getElementById('ctaSecondaryBtn')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    showNotification('🎬 Découvrez comment nos membres gagnent de l\'argent', 'info');
+});
+
+document.getElementById('newsletterBtn')?.addEventListener('click', () => {
+    const email = document.getElementById('newsletterEmail').value;
+    if (email && email.includes('@')) {
+        showNotification('📧 Merci pour votre inscription à la newsletter !', 'success');
+        document.getElementById('newsletterEmail').value = '';
+    } else {
+        showNotification('⚠️ Veuillez entrer un email valide', 'error');
+    }
+});
+
+// Système de notifications élégant
+function showNotification(message, type) {
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, #1e2128, #16181d);
+        backdrop-filter: blur(20px);
+        border: 1px solid ${type === 'success' ? '#4fd1c5' : type === 'error' ? '#ff6b6b' : '#4fd1c5'};
+        border-radius: 50px;
+        padding: 14px 24px;
+        color: white;
+        z-index: 10000;
+        animation: slideInRight 0.3s ease-out;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        font-size: 0.9rem;
+        pointer-events: none;
+    `;
+    notification.innerHTML = message;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.animation = 'slideInRight 0.3s ease-out reverse';
+        setTimeout(() => notification.remove(), 300);
+    }, 3000);
+}
+
+// Animation des statistiques
+function animateStats() {
+    const stats = document.querySelectorAll('.stat-number');
+    stats.forEach(stat => {
+        const target = stat.innerText;
+        if (target.includes('+')) {
+            const number = parseInt(target);
+            let current = 0;
+            const increment = number / 50;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= number) {
+                    stat.innerText = target;
+                    clearInterval(timer);
+                } else {
+                    stat.innerText = '+' + Math.floor(current) + 'K';
+                }
+            }, 30);
+        } else if (target.includes('M')) {
+            const number = parseFloat(target) * 1000000;
+            let current = 0;
+            const increment = number / 50;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= number) {
+                    stat.innerText = target;
+                    clearInterval(timer);
+                } else {
+                    stat.innerText = '€' + (current / 1000000).toFixed(1) + 'M';
+                }
+            }, 30);
         }
-        alert("✅ Félicitations ! Un lien de confirmation a été envoyé à "+email+"\nBienvenue sur NeTubeX, l'espace de rémunération digitale.");
-        closePopup();
-        emailInput.value="";
     });
-    overlay.addEventListener('click',function(e){
-        if(e.target === overlay) closePopup();
-    });
-    document.addEventListener('keydown',function(e){
-        if(e.key === 'Escape' && overlay.classList.contains('active')) closePopup();
-    });
-})();
+}
+
+// Initialisation
+createParticles();
+setTimeout(animateStats, 500);
+
+// Gestionnaire d'image par défaut
+const memberImg = document.querySelector('.member-hero-img');
+if (memberImg) {
+    memberImg.onerror = function() {
+        this.src = "https://placehold.co/800x600/1e2128/4fd1c5?text=NeoTribeX+Premium";
+    };
+}
+
+// Animation supplémentaire au chargement
+window.addEventListener('load', () => {
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+});
 </script>
 </body>
 </html>
