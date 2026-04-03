@@ -1,204 +1,146 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NeTubeX · Accueil</title>
-
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box;}
-
-    body{
-      font-family:'Inter',sans-serif;
-      background:linear-gradient(145deg,#0b0f1c,#0a0e1a);
-      color:#f0f3fc;
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-    }
-
-    header{
-      padding:1rem 2rem;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      background:rgba(18,22,35,0.85);
-      backdrop-filter:blur(10px);
-      border-bottom:1px solid rgba(72,120,255,0.25);
-    }
-
-    nav a{
-      color:#7b9eff;
-      margin-left:1rem;
-      text-decoration:none;
-      font-weight:600;
-    }
-
-    header button{
-      background:linear-gradient(100deg,#3b5ef5,#6d3aff);
-      border:none;
-      border-radius:2rem;
-      padding:0.5rem 1rem;
-      color:white;
-      cursor:pointer;
-    }
-
-    main{
-      flex:1;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      text-align:center;
-      padding:2rem;
-    }
-
-    h1{font-size:2rem;margin-bottom:1rem;}
-
-    .main-btn{
-      padding:1rem 2rem;
-      border:none;
-      border-radius:2rem;
-      background:linear-gradient(100deg,#3b5ef5,#6d3aff);
-      color:white;
-      cursor:pointer;
-    }
-
-    footer{
-      text-align:center;
-      padding:1rem;
-      font-size:0.75rem;
-      color:#4c5470;
-    }
-
-    /* POPUP */
-    .modal{
-      display:none;
-      position:fixed;
-      width:100%;
-      height:100%;
-      top:0;
-      left:0;
-      background:rgba(0,0,0,0.7);
-      justify-content:center;
-      align-items:center;
-    }
-
-    .modal-content{
-      background:#121623;
-      padding:2rem;
-      border-radius:1.5rem;
-      width:90%;
-      max-width:400px;
-      text-align:center;
-    }
-
-    .modal-content input{
-      width:100%;
-      margin:0.5rem 0;
-      padding:0.8rem;
-      border-radius:1rem;
-      border:none;
-      background:#0e1224;
-      color:white;
-    }
-
-    .modal-content button{
-      width:100%;
-      margin-top:1rem;
-      padding:0.8rem;
-      border:none;
-      border-radius:1rem;
-      background:linear-gradient(100deg,#3b5ef5,#6d3aff);
-      color:white;
-    }
-  </style>
-
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NeTubeX · Accueil</title>
+<style>
+  body { font-family: 'Inter', sans-serif; margin:0; padding:0; background:linear-gradient(145deg,#0b0f1c 0%,#0a0e1a 100%); color:#f0f3fc;}
+  header { padding:1rem 2rem; display:flex; justify-content:space-between; background:rgba(18,22,35,0.85); backdrop-filter:blur(10px); border-bottom:1px solid rgba(72,120,255,0.25);}
+  header a { color:#7b9eff; margin-left:1rem; text-decoration:none; font-weight:600;}
+  main { padding:2rem; text-align:center;}
+  main h1 { font-size:2rem; margin-bottom:1rem;}
+  main p { margin-bottom:2rem;}
+  button { padding:1rem 2rem; font-size:1rem; border-radius:2rem; border:none; background:linear-gradient(100deg,#3b5ef5,#6d3aff); color:#fff; cursor:pointer; transition:0.2s;}
+  button:hover { transform:scale(1.03); box-shadow:0 8px 20px rgba(59,94,245,0.3);}
+  footer { text-align:center; padding:1rem; font-size:0.75rem; color:#4c5470;}
+  /* Pop-up login */
+  #loginForm { background:rgba(18,22,35,0.95); padding:2rem; border-radius:1.5rem; max-width:400px; margin:2rem auto; display:block;}
+  #loginForm input { width:100%; padding:0.8rem; margin-bottom:1rem; border-radius:1rem; border:1px solid #2a2f42; background:rgba(12,15,28,0.8); color:#f0f3fc; }
+  #loginMessage { color:#ff7676; margin-bottom:1rem; }
+  /* Dashboard utilisateur */
+  #userSection { display:none; margin-top:2rem; }
+  .dashboard-cards { display:flex; flex-wrap:wrap; gap:1rem; margin-top:1rem; justify-content:center;}
+  .card { flex:1 1 200px; background:rgba(12,15,28,0.85); padding:1rem; border-radius:1rem; border:1px solid rgba(72,120,255,0.25);}
+  .card h3 { margin-bottom:0.5rem; color:#7b9eff; }
+</style>
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 </head>
-
 <body>
-
 <header>
   <div>NeTubeX</div>
-
   <nav>
-    <a href="index.html">Accueil</a>
-    <a href="pets/">PETS</a>
-    <a href="pgco/">PGCO</a>
-    <a href="pilote/">Pilote</a>
-    <a href="apropos/">À propos</a>
+    <a href="#accueil">Accueil</a>
+    <a href="#pets">PETS</a>
+    <a href="#pgco">PGCO</a>
+    <a href="#pilote">Pilote</a>
+    <a href="#login">Login</a>
+    <a href="#apropos">À propos</a>
+    <a href="#dashboard">Dashboard</a>
   </nav>
-
-  <button onclick="openModal()">Connexion</button>
 </header>
 
 <main>
   <h1>Bienvenue sur NeTubeX</h1>
   <p>Un espace de rémunération digitale pour tous.</p>
+  <button onclick="document.getElementById('loginForm').style.display='block'">Connexion</button>
+  <button onclick="window.open('https://wa.me/243808359598','_blank')">Postulez maintenant</button>
 
-  <button class="main-btn"
-    onclick="window.location.href='https://wa.me/243808359598'">
-    Postulez maintenant
-  </button>
+  <!-- Login Pop-up -->
+  <div id="loginForm">
+    <h2>Connexion</h2>
+    <input type="text" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Mot de passe">
+    <div id="loginMessage"></div>
+    <button id="loginBtn">Se connecter</button>
+  </div>
+
+  <!-- Dashboard Utilisateur simple -->
+  <div id="userSection">
+    <h2>Dashboard Utilisateur</h2>
+    <p>Bienvenue, <span id="userPseudo"></span> !</p>
+    <div class="dashboard-cards">
+      <div class="card">
+        <h3>Solde</h3>
+        <p id="userBalance">0 $</p>
+      </div>
+      <div class="card">
+        <h3>Points cumulés</h3>
+        <p id="userPoints">0 pts</p>
+      </div>
+      <div class="card">
+        <h3>Tâches disponibles</h3>
+        <ul id="userTasks"><li>Aucune tâche pour le moment</li></ul>
+      </div>
+    </div>
+  </div>
+
 </main>
 
 <footer>
   © NeTubeX — expérience immersive
 </footer>
 
-<!-- POPUP -->
-<div class="modal" id="modal">
-  <div class="modal-content">
-    <h2>Connexion</h2>
-    <input type="text" id="email" placeholder="Email">
-    <input type="password" id="password" placeholder="Mot de passe">
-    <button onclick="login()">Se connecter</button>
-  </div>
-</div>
-
 <script>
-  // POPUP
-  function openModal(){
-    document.getElementById("modal").style.display="flex";
-  }
-
-  // FIREBASE CONFIG
+  // Firebase config
   const firebaseConfig = {
-    apiKey: "AIzaSy...",
+    apiKey: "AIzaSyB_GdmPBnWl3w6g99j1cGO7vxDdxmKr4QA",
     authDomain: "netubexmoney.firebaseapp.com",
     projectId: "netubexmoney",
+    storageBucket: "netubexmoney.firebasestorage.app",
+    messagingSenderId: "856592608176",
+    appId: "1:856592608176:web:69f9df9cfd4f8c28630475"
   };
-
-  firebase.initializeApp(firebaseConfig);
+  const app = firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
 
-  // LOGIN
-  async function login(){
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value.trim();
+  const loginBtn = document.getElementById('loginBtn');
+  const loginMessage = document.getElementById('loginMessage');
 
-    const query = await db.collection("users")
-      .where("email","==",email)
-      .where("password","==",password)
-      .get();
+  const loginForm = document.getElementById('loginForm');
+  const userSection = document.getElementById('userSection');
 
-    if(query.empty){
-      alert("Identifiants incorrects");
-      return;
+  const userPseudo = document.getElementById('userPseudo');
+  const userBalance = document.getElementById('userBalance');
+  const userPoints = document.getElementById('userPoints');
+  const userTasks = document.getElementById('userTasks');
+
+  loginBtn.addEventListener('click', async () => {
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+    if(!email || !password){ loginMessage.textContent="Remplissez tous les champs !"; return; }
+
+    try {
+      const query = await db.collection('users')
+        .where('email','==',email)
+        .where('password','==',password)
+        .get();
+
+      if(query.empty){ loginMessage.textContent="Email ou mot de passe incorrect."; return; }
+
+      const user = query.docs[0].data();
+      loginForm.style.display='none';
+
+      userSection.style.display='block';
+      userPseudo.textContent = user.pseudo || "Utilisateur";
+      userBalance.textContent = user.balance ? user.balance+" $" : "0 $";
+      userPoints.textContent = user.points ? user.points+" pts" : "0 pts";
+      userTasks.innerHTML="";
+      if(user.tasks && user.tasks.length){
+        user.tasks.forEach(task=>{
+          const li=document.createElement('li'); li.textContent=task; userTasks.appendChild(li);
+        });
+      } else {
+        const li=document.createElement('li'); li.textContent="Aucune tâche pour le moment"; userTasks.appendChild(li);
+      }
+
+    } catch(err){
+      console.error(err);
+      loginMessage.textContent="Erreur lors de la connexion.";
     }
-
-    const user = query.docs[0].data();
-
-    // REDIRECTION
-    if(user.isAdmin){
-      window.location.href = "admin/";
-    } else {
-      window.location.href = "dashboard/";
-    }
-  }
+  });
 </script>
 
 </body>
