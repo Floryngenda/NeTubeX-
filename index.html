@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>NeTubeX</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f0f2f5; }
+    .container { max-width: 500px; margin: 50px auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+    h1, h2 { text-align: center; color: #4b0082; }
+    input { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc; }
+    button { width: 100%; padding: 10px; margin-top: 10px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+    button:hover { opacity: 0.9; }
+    #loginBtn { background: #4b0082; color: white; }
+    .whatsapp-btn { background: #25D366; color: white; }
+    #message { text-align: center; margin: 10px 0; font-weight: bold; }
+    #dashboard { display: none; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    th { background-color: #4b0082; color: white; }
+    #welcomePopup { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.5); z-index:1000; }
+    #welcomePopup .popup-content { background:white; padding:20px; max-width:400px; margin:100px auto; border-radius:10px; text-align:center; }
+    #welcomePopup button { width:auto; margin-top:10px; }
+  </style>
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+
+  <!-- Pop-up de bienvenue -->
+  <div id="welcomePopup">
+    <div class="popup-content">
+      <h2>Bienvenue sur NeTubeX !</h2>
+      <p>Connectez-vous pour accéder à votre dashboard.</p>
+      <button onclick="closePopup()">C'est parti !</button>
+    </div>
+  </div>
+
+  <!-- Login -->
+  <div class="container" id="loginContainer">
+    <h1>NeTubeX</h1>
+    <p>Espace de rémunération digitale</p>
+    <input type="text" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Mot de passe">
+    <button id="loginBtn">Se connecter</button>
+    <p id="message"></p>
+    <button class="whatsapp-btn" onclick="window.open('https://wa.me/243808359598','_blank')">Postuler maintenant</button>
+  </div>
+
+  <!-- Dashboard -->
+  <div class="container" id="dashboard">
+    <h2>Dashboard NeTubeX</h2>
+    <p>Liste des utilisateurs :</p>
+    <table id="usersList">
+      <thead>
+        <tr>
+          <th>Pseudo</th>
+          <th>Email</th>
+          <th>Role</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <button onclick="logout()">Se déconnecter</button>
+  </div>
+
+  <script>
+    // Pop-up
+    const welcomePopup = document.getElementById("welcomePopup");
+    function closePopup() { welcomePopup.style.display = "none"; }
+    window.onload = () => { welcomePopup.style.display = "block"; };
+
+    // Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyB_GdmPBnWl3w6g99j1cGO7vxDdxmKr4QA",
+      authDomain: "netubexmoney.firebaseapp.com",
+      projectId: "netubexmoney",
+      storageBucket: "netubexmoney.firebasestorage.app",
+      messagingSenderId: "856592608176",
+      appId: "1:856592608176:web:69f9df9cfd4f8c28630475"
+    };
+
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // Login
+    const loginBtn = document.getElementById("loginBtn");
+    const message = document.getElementById("message");
+    const loginContainer = document.getElementById("loginContainer");
+    const dashboard = document.getElementById("dashboard");
+    const usersListBody = document.querySelector("#usersList tbody");
+
+    loginBtn.addEventListener("click", async () => {
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      if(!email || !password){
+        message.textContent = "Remplissez tous les champs !";
+        message.style.color = "red";
+        return;
+      }
+
+      try {
+        const querySnapshot = await db.collection("users")
+          .where("email", "==", email)
+          .where("password", "==", password)
+          .get();
+
+        if(querySnapshot.empty){
+          message.textContent = "Email ou mot de passe incorrect.";
+          message.style.color = "red";
+          return;
+        }
+
+        const userDoc = querySnapshot.docs[0].data();
+        if(userDoc.isAdmin){
+          loginContainer.style.display = "none";
+          dashboard.style.display = "block";
+          message.textContent = "";
+          loadUsers();
+        } else {
+          message.textContent = "Vous n'avez pas accès à l'administration.";
+          message.style.color = "red";
+        }
+
+      } catch (err) {
+        console.error(err);
+        message.textContent = "Erreur lors de la connexion.";
+        message.style.color = "red";
+      }
+    });
+
+    // Load users
+    async function loadUsers(){
+      const snapshot = await db.collection("users").get();
+      usersListBody.innerHTML = "";
+      snapshot.forEach(doc => {
+        const user = doc.data();
+        const row = `<tr>
+          <td>${user.pseudo}</td>
+          <td>${user.email}</td>
+          <td>${user.role}</td>
+        </tr>`;
+        usersListBody.innerHTML += row;
+      });
+    }
+
+    // Logout
+    function logout(){
+      dashboard.style.display = "none";
+      loginContainer.style.display = "block";
+      document.getElementById("email").value = "";
+      document.getElementById("password").value = "";
+      message.textContent = "";
+    }
+  </script>
+</body>
+</html>
