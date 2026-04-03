@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>NeTubeX - Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+  <div class="dashboard-container">
+    <h1>Bienvenue sur le Dashboard NeTubeX</h1>
+    <p>Gestion des utilisateurs et des informations</p>
+
+    <div id="usersList"></div>
+  </div>
+
+  <script>
+    // Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyB_GdmPBnWl3w6g99j1cGO7vxDdxmKr4QA",
+      authDomain: "netubexmoney.firebaseapp.com",
+      projectId: "netubexmoney",
+      storageBucket: "netubexmoney.firebasestorage.app",
+      messagingSenderId: "856592608176",
+      appId: "1:856592608176:web:69f9df9cfd4f8c28630475"
+    };
+
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    const usersList = document.getElementById("usersList");
+
+    async function loadUsers(){
+      const snapshot = await db.collection("users").get();
+      let html = "<h2>Liste des utilisateurs</h2><ul>";
+      snapshot.forEach(doc => {
+        const user = doc.data();
+        html += `<li>${user.pseudo} (${user.email}) - Role: ${user.role}</li>`;
+      });
+      html += "</ul>";
+      usersList.innerHTML = html;
+    }
+
+    loadUsers();
+  </script>
+</body>
+</html>
