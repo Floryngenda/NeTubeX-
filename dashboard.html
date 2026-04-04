@@ -2,106 +2,90 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
-<title>NeTubeX · Jeux Rémunérateurs</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{background:#0a0c12;font-family:'Inter',system-ui,'Segoe UI',sans-serif;color:#eef2ff;min-height:100vh;overflow-x:hidden;}
-.header{position:sticky;top:0;z-index:100;background:#0a0c12;border-bottom:1px solid #1e2432;padding:0.75rem 1rem;padding-top:max(0.75rem,env(safe-area-inset-top));display:flex;justify-content:space-between;align-items:center;width:100%;}
-.logo h1{font-size:1.3rem;font-weight:700;background:linear-gradient(135deg,#b9f6e0,#00e68a);-webkit-background-clip:text;background-clip:text;color:transparent;}
-.user-code{background:#13161f;padding:6px 16px;border-radius:40px;border:0.5px solid #252b3a;font-size:0.8rem;font-weight:500;font-family:monospace;letter-spacing:1px;}
-.user-code i{color:#00e68a;margin-right:6px;}
-.icon-btn{background:#13161f;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:0.2s;border:0.5px solid #252b3a;}
-.icon-btn:hover{background:#1e2538;}
-.feed-container{max-width:680px;margin:1rem auto 90px auto;padding:0 1rem;display:flex;flex-direction:column;gap:1rem;}
-.section-title{font-size:1.5rem;font-weight:700;margin:0.5rem 0 0 0;background:linear-gradient(135deg,#b9f6e0,#00e68a);-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block;}
-.post-card{background:#11141d;border-radius:24px;overflow:hidden;border:0.5px solid #232835;transition:0.2s;}
-.post-header{display:flex;align-items:center;gap:12px;padding:14px 16px;}
-.avatar{width:44px;height:44px;background:linear-gradient(135deg,#2a5a4a,#00a884);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;}
-.post-meta h4{font-size:1rem;font-weight:600;}
-.post-meta span{font-size:0.7rem;color:#8e98b3;}
-.post-image{width:100%;height:200px;object-fit:cover;background:#1a1e2a;}
-.gain-btn{margin:14px 16px 18px 16px;background:#00a884;border:none;padding:12px;border-radius:60px;font-weight:600;color:#0a0c12;cursor:pointer;width:calc(100% - 32px);transition:0.2s;}
-.gain-btn:hover{background:#00e68a;transform:scale(1.02);}
-.floating-group{position:fixed;bottom:20px;right:16px;display:flex;flex-direction:column;gap:12px;z-index:200;}
-.float-item{background:#13161f;backdrop-filter:blur(12px);width:52px;height:52px;border-radius:28px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.4);border:0.5px solid #2e3548;transition:0.2s;}
-.float-item:hover{background:#1e2538;transform:scale(1.05);}
-.float-item.x-button{background:linear-gradient(135deg,#b8860b,#ffd700);border:none;}
-.float-item.x-button i{color:#0a0c12;font-weight:bold;}
-.slide-popup{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);backdrop-filter:blur(12px);z-index:1000;display:flex;align-items:center;justify-content:center;visibility:hidden;transition:visibility 0.2s,opacity 0.2s;opacity:0;}
-.slide-popup.active{visibility:visible;opacity:1;}
-.popup-left{background:#11141d;max-width:340px;width:85%;border-radius:40px;padding:28px 20px;text-align:center;border:0.5px solid #2e3548;transform:translateX(-40px);transition:transform 0.3s cubic-bezier(0.2,0.9,0.4,1.1);}
-.slide-popup.active .popup-left{transform:translateX(0);}
-.popup-btn{background:#00a884;border:none;padding:10px 24px;border-radius:40px;font-weight:bold;margin-top:20px;cursor:pointer;}
-.close-popup-btn{background:#1f2a3a;margin-top:12px;border:none;padding:8px 20px;border-radius:40px;color:white;cursor:pointer;}
-.input-group input{width:100%;padding:12px;border-radius:40px;border:none;background:#1a1e2c;color:white;margin:8px 0;}
-.game-stats{background:#1a1e2c;border-radius:16px;padding:16px;margin:16px 0;text-align:left;max-height:300px;overflow-y:auto;}
-.game-stats p{margin:8px 0;display:flex;justify-content:space-between;align-items:center;}
-.game-stats .label{color:#8e98b3;}
-.game-stats .value{color:#00e68a;font-weight:bold;}
-.fullscreen-iframe{position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0c12;z-index:2000;display:flex;flex-direction:column;visibility:hidden;opacity:0;transition:0.2s;}
-.fullscreen-iframe.active{visibility:visible;opacity:1;}
-.iframe-close{position:absolute;top:20px;right:20px;width:44px;height:44px;background:#ffd700;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2001;border:none;font-size:1.5rem;color:#0a0c12;font-weight:bold;box-shadow:0 4px 12px rgba(0,0,0,0.3);}
-.iframe-close:hover{background:#ffed4e;transform:scale(1.05);}
-.fullscreen-iframe iframe{width:100%;height:100%;border:none;background:white;}
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NeTubeX Login + Dashboard</title>
 </head>
 <body>
-<header class="header">
-<div class="logo"><h1>NeTubeX</h1></div>
-<div class="user-code"><i class="fas fa-code"></i> MA-NX-01</div>
-<div class="icon-btn" id="settingsBtn"><i class="fas fa-cog"></i></div>
-</header>
-<div class="feed-container">
-<div class="section-title">🎮 Jeux Rémunérateurs</div>
-<div id="gamesContainer"></div>
+
+<div id="loginContainer">
+  <h2>Connexion NeTubeX</h2>
+  <input type="email" id="email" placeholder="Email">
+  <input type="password" id="password" placeholder="Mot de passe">
+  <button id="loginBtn">Se connecter</button>
+  <div id="error" style="color:red;"></div>
 </div>
-<div class="floating-group">
-<div class="float-item x-button" id="xButton"><i class="fas fa-times"></i> X</div>
+
+<div id="dashboardContainer" style="display:none;">
+  <h2>Dashboard</h2>
+  <iframe id="offerwall" style="width:100%; height:600px;"></iframe>
+  <button id="logoutBtn">Déconnexion</button>
 </div>
-<div id="settingsPopup" class="slide-popup">
-<div class="popup-left">
-<i class="fas fa-user-astronaut" style="font-size:2.5rem;color:#00e68a;"></i>
-<h3 style="margin:12px 0;">Connexion Pilote</h3>
-<div class="input-group"><input type="password" id="pilotPassword" placeholder="Mot de passe" autocomplete="off"></div>
-<button class="popup-btn" id="loginBtn">Se connecter</button>
-<button class="close-popup-btn" id="closeSettingsBtn">Fermer</button>
-</div>
-</div>
-<div id="gamePopup" class="slide-popup">
-<div class="popup-left" id="gamePopupContent">
-<i class="fas fa-fish" style="font-size:2.5rem;color:#00e68a;"></i>
-<h3 style="margin:12px 0;" id="gamePopupTitle">Wild Fish</h3>
-<div class="game-stats" id="gamePopupStats"></div>
-<button class="popup-btn" id="closeGamePopup">Fermer</button>
-</div>
-</div>
-<div id="fullscreenIframe" class="fullscreen-iframe">
-<button class="iframe-close" id="closeIframeBtn">✕</button>
-<iframe src="https://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Accueil_principal" title="Wikipedia"></iframe>
-</div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
 <script>
-const games=[
-{id:1,name:"Wild Fish",avatar:"🐟",img:"https://i.postimg.cc/CLL76wDt/IMG-3445.jpg",totalPoints:177846,objectives:[{name:"Reach 100 meter",points:10},{name:"Reach 200 meter",points:34},{name:"Reach 400 meter",points:473},{name:"Reach 700 meter",points:2644},{name:"Reach 1200 meter",points:9443},{name:"Reach 2000 meter",points:47212},{name:"Reach 5000 meter",points:118030}]},
-{id:2,name:"Cyber Rush",avatar:"🎮",img:"https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&auto=format",totalPoints:1000000,objectives:[{name:"Niveau 1",points:125000},{name:"Niveau 2",points:125000},{name:"Niveau 3",points:125000},{name:"Niveau 4",points:125000},{name:"Niveau 5",points:125000},{name:"Niveau 6",points:125000},{name:"Niveau 7",points:125000},{name:"Niveau 8",points:125000}]},
-{id:3,name:"Neon Drifter",avatar:"🏎️",img:"https://images.unsplash.com/photo-1611996575748-3f697d1b7a0e?w=600&auto=format",totalPoints:1000000,objectives:[{name:"Circuit 1",points:200000},{name:"Circuit 2",points:200000},{name:"Circuit 3",points:200000},{name:"Circuit 4",points:200000},{name:"Circuit 5",points:200000}]},
-{id:4,name:"Pixel Arena",avatar:"🎯",img:"https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=600&auto=format",totalPoints:1000000,objectives:[{name:"Zone 1",points:250000},{name:"Zone 2",points:250000},{name:"Zone 3",points:250000},{name:"Zone 4",points:250000}]},
-{id:5,name:"Mystic Kingdom",avatar:"🧙",img:"https://images.unsplash.com/photo-1614294148960-4aa973632f5d?w=600&auto=format",totalPoints:1000000,objectives:[{name:"Quête 1",points:333334},{name:"Quête 2",points:333333},{name:"Quête 3",points:333333}]}
-];
-function renderGames(){const container=document.getElementById('gamesContainer');container.innerHTML='';games.forEach(game=>{const card=document.createElement('div');card.className='post-card';card.innerHTML=`<div class="post-header"><div class="avatar">${game.avatar}</div><div class="post-meta"><h4>${game.name} <span style="color:#00e68a;">• ${game.totalPoints.toLocaleString()} points</span></h4><span>${game.objectives.length} objectifs</span></div></div><img class="post-image" src="${game.img}" alt="${game.name}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600&auto=format'"><button class="gain-btn" data-id="${game.id}">🎮 Gagner ${game.totalPoints.toLocaleString()} points</button>`;container.appendChild(card);const btn=card.querySelector('.gain-btn');btn.addEventListener('click',()=>showGamePopup(game));});}
-function showGamePopup(game){const statsContainer=document.getElementById('gamePopupStats');statsContainer.innerHTML='';game.objectives.forEach(obj=>{const p=document.createElement('p');p.innerHTML=`<span class="label">🎯 ${obj.name}</span><span class="value">${obj.points.toLocaleString()} pts</span>`;statsContainer.appendChild(p);});document.getElementById('gamePopupTitle').innerText=game.name;openPopup('gamePopup');}
-function openPopup(popupId){document.getElementById(popupId).classList.add('active');}
-function closePopup(popupId){document.getElementById(popupId).classList.remove('active');}
-document.getElementById('closeGamePopup').addEventListener('click',()=>closePopup('gamePopup'));
-const settingsPopup=document.getElementById('settingsPopup');
-document.getElementById('settingsBtn').addEventListener('click',()=>{document.getElementById('pilotPassword').value='';openPopup('settingsPopup');});
-document.getElementById('closeSettingsBtn').addEventListener('click',()=>closePopup('settingsPopup'));
-document.getElementById('loginBtn').addEventListener('click',()=>{const password=document.getElementById('pilotPassword').value;if(password==="Chancelle12"){document.getElementById('pilotPassword').value='';window.open('https://gain.gg/earn','_blank');closePopup('settingsPopup');}else{alert("❌ Mot de passe incorrect");document.getElementById('pilotPassword').value='';}});
-document.querySelectorAll('.slide-popup').forEach(pop=>{pop.addEventListener('click',(e)=>{if(e.target===pop)pop.classList.remove('active');});});
-document.getElementById('xButton').addEventListener('click',()=>{document.getElementById('fullscreenIframe').classList.add('active');});
-document.getElementById('closeIframeBtn').addEventListener('click',()=>{document.getElementById('fullscreenIframe').classList.remove('active');});
-renderGames();
+  const firebaseConfig = {
+    apiKey: "AIzaSyC2Covw6v6PI7AbItSGVO90z-JrrMCxC_I",
+    authDomain: "netubexmoney.firebaseapp.com",
+    projectId: "netubexmoney",
+    storageBucket: "netubexmoney.firebasestorage.app",
+    messagingSenderId: "856592608176",
+    appId: "1:856592608176:web:06cc2815cd8a1be0630475"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+
+  const loginContainer = document.getElementById("loginContainer");
+  const dashboardContainer = document.getElementById("dashboardContainer");
+  const loginBtn = document.getElementById("loginBtn");
+  const logoutBtn = document.getElementById("logoutBtn");
+  const errorDiv = document.getElementById("error");
+  const iframe = document.getElementById("offerwall");
+
+  // Surveille connexion Firebase
+  auth.onAuthStateChanged(user => {
+    if(user){
+      // Affiche dashboard
+      loginContainer.style.display = "none";
+      dashboardContainer.style.display = "block";
+
+      // Injecte userID dans l'iframe Timewall
+      const userID = user.uid;
+      iframe.src = "https://timewall.io/users/login?oid=e9bb1fdfd1ed93a0&uid=" + userID;
+    } else {
+      // Affiche login
+      loginContainer.style.display = "block";
+      dashboardContainer.style.display = "none";
+    }
+  });
+
+  // Bouton login
+  loginBtn.addEventListener("click", () => {
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    if(!email || !password){
+      errorDiv.textContent = "Veuillez remplir tous les champs";
+      return;
+    }
+
+    auth.signInWithEmailAndPassword(email, password)
+      .catch(error => {
+        if(error.code === "auth/user-not-found"){
+          errorDiv.textContent = "Utilisateur inexistant";
+        } else if(error.code === "auth/wrong-password"){
+          errorDiv.textContent = "Mot de passe incorrect";
+        } else {
+          errorDiv.textContent = error.message;
+        }
+      });
+  });
+
+  // Bouton logout
+  logoutBtn.addEventListener("click", () => auth.signOut());
+
 </script>
 </body>
 </html>
